@@ -1,4 +1,4 @@
-package no.ntnu.idatx2003.oblig3.cardgame;
+package no.ntnu.idata2003.oblig3.cardgame;
 
 
 // TODO: Check that JavaFX is working from the command line.
