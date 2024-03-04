@@ -1,6 +1,7 @@
 package no.ntnu.idata2003.oblig3.cardgame;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Represents a deck of 52 cards.
@@ -32,10 +33,34 @@ public class DeckOfCards {
     }
   }
 
+  private ArrayList<PlayingCard> dealHand(int n) {
+    ArrayList<PlayingCard> hand = new ArrayList<>();
+
+    Random random = new Random();
+
+    if (n >= 1 && n <= 52) {
+      int num = 52;
+      for (int i = 0; i < n; i++) {
+        int randomInt = random.nextInt(num);
+        hand.add(this.deckOfCards.get(randomInt));
+        this.deckOfCards.remove(randomInt);
+        num--;
+      }
+    }
+    return hand;
+  }
+
+  // TODO: Should there be a reset/shuffle deck method?
+
   // Used for testing. Remove or move later.
   public static void main(String[] args) {
     DeckOfCards deck = new DeckOfCards();
-    for (PlayingCard card : deck.deckOfCards) {
+//    for (PlayingCard card : deck.deckOfCards) {
+//      System.out.println(card.getAsString());
+//    }
+
+
+    for (PlayingCard card : deck.dealHand(1)) {
       System.out.println(card.getAsString());
     }
   }
