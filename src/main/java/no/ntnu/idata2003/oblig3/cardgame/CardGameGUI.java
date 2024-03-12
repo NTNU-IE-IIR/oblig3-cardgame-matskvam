@@ -98,12 +98,13 @@ public class CardGameGUI extends Application {
     bottomGrid.add(bottomBRHBox, 1, 1);
     bottomGrid.setVgap(5);
     bottomGrid.setHgap(30);
+    bottomGrid.setPadding(new Insets(10));
 
     rootNode.setBottom(bottomGrid);
 
 
     // May use Text for changing information.
-    // TODO: set flowpane in center.
+    // TODO: set flowpane in center. Add flowpane to pane?
     // TODO: create a class for hand.
 
     // Center pane --------------------
@@ -115,7 +116,6 @@ public class CardGameGUI extends Application {
     pane.setBackground(backgroundCenter);
     rootNode.setCenter(pane);
 
-
     // Scene
     Scene scene = new Scene(rootNode, 800, 500);
 
@@ -124,4 +124,6 @@ public class CardGameGUI extends Application {
 
     stage.show();
   }
+
+  // TODO: Create launcher.
 }
