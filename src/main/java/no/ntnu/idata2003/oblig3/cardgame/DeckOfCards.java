@@ -33,7 +33,15 @@ public class DeckOfCards {
     }
   }
 
-  private ArrayList<PlayingCard> dealHand(int n) {
+  /**
+   * Deals a given amount of cards from the deck of cards.
+   *
+   * <p>The number of cards to be dealt must be between 1 and 52.</p>
+   *
+   * @param n number of cards to be dealt between 1 and 52.
+   * @return a given amount of cards from the deck of cards.
+   */
+  public ArrayList<PlayingCard> dealHand(int n) {
     ArrayList<PlayingCard> hand = new ArrayList<>();
 
     Random random = new Random();
@@ -60,8 +68,23 @@ public class DeckOfCards {
 //    }
 
 
-    for (PlayingCard card : deck.dealHand(1)) {
+//    for (PlayingCard card : deck.dealHand(1)) {
+//      System.out.println(card.getAsString());
+//    }
+
+    HandOfCards hand = new HandOfCards(5);
+    for (PlayingCard card : hand.getHandOfCards()) {
       System.out.println(card.getAsString());
     }
+
+    System.out.println("The sum of the cards is: " + hand.checkSum());
+
+    for (PlayingCard card : hand.getHearts()) {
+      System.out.println(card.getAsString());
+    }
+    if (hand.getHearts().isEmpty()) {
+      System.out.println("No Hearts");
+    }
+
   }
 }
