@@ -72,6 +72,50 @@ public class HandOfCards {
 
   // TODO: checkQueenOfSpades (Sjekk om kortet "Spar dame" finnes blant kortene på hånden.)
 
+  /**
+   * Returns {@code true} if the hand of cards contains queen of spades, and {@code false}
+   * otherwise.
+   *
+   * @return {@code true} if the hand of cards contains queen of spades, and {@code false}
+   * otherwise.
+   */
+  public boolean checkQueenOfSpades() {
+    boolean queenOfSpades = false;
+    for (PlayingCard card : this.handOfCards) {
+      if (card.getSuit() == 'S' && card.getFace() == 12) {
+        queenOfSpades = true;
+      }
+    }
+    return queenOfSpades;
+  }
+
   // TODO: checkFlush (Sjekk om kortene på hånd utgjør en "5-flush". D.v.s. 5 kort av samme farge
   //  (5 hjerter eller 5 ruter eller 5 kløver eller 5 spar).)
+
+  public boolean checkFlush() {
+    // This code was made with the help of GitHub Copilot.
+    boolean flush = false;
+    int hearts = 0;
+    int diamonds = 0;
+    int clubs = 0;
+    int spades = 0;
+
+    for (PlayingCard card : this.handOfCards) {
+      if (card.getSuit() == 'H') {
+        hearts++;
+      } else if (card.getSuit() == 'D') {
+        diamonds++;
+      } else if (card.getSuit() == 'C') {
+        clubs++;
+      } else if (card.getSuit() == 'S') {
+        spades++;
+      }
+    }
+
+    if (hearts >= 5 || diamonds >= 5 || clubs >= 5 || spades >= 5) {
+      flush = true;
+    }
+
+    return flush;
+  }
 }

@@ -86,5 +86,18 @@ public class DeckOfCards {
       System.out.println("No Hearts");
     }
 
+    if (hand.checkFlush()) {
+      System.out.println("Flush");
+    } else {
+      System.out.println("No Flush");
+    }
+
+    int count = 0;
+
+    while (!hand.checkFlush()) {
+        hand = new HandOfCards(5);
+        count++;
+    }
+    System.out.println("Number of hands dealt before flush: " + count);
   }
 }
