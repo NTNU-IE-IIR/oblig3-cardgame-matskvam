@@ -1,10 +1,8 @@
 package no.ntnu.idata2003.oblig3.cardgame;
 
-import java.io.FileInputStream;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,12 +15,10 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -30,10 +26,9 @@ import javafx.stage.Stage;
  */
 public class CardGameGui extends Application {
   private CardGameController controller;
-  private Label sumLabel;
-  private Label cardOfHeartsLabel;
-  private Label flushLabel;
-  private Label queenOfSpadesLabel;
+  private Label sumLabel,cardOfHeartsLabel ,flushLabel ,queenOfSpadesLabel;
+  private String path1, path2, path3, path4, path5;
+  private ImageView cardImageView1, cardImageView2, cardImageView3, cardImageView4, cardImageView5;
 
   /**
    * Constructs the main window.
@@ -50,12 +45,13 @@ public class CardGameGui extends Application {
     // Right pane --------------------
     Button buttonDeal = new Button("Deal hand");
     buttonDeal.setOnAction((ActionEvent action) -> {
-      System.out.println("Dealing hand...");
+      controller.doDealHand();
+      controller.showHand();
     });
 
     Button buttonCheck = new Button("Check hand");
     buttonCheck.setOnAction((ActionEvent action) -> {
-      System.out.println("Checking hand...");
+      controller.doCheckHand();
     });
 
     buttonDeal.setMaxWidth(200);
@@ -75,18 +71,14 @@ public class CardGameGui extends Application {
     Label labelFlush = new Label("Flush:");
     Label labelQueenOfSpades = new Label("Queen of spades:");
 
-    Label labelVarSumOfFaces = new Label("-");
-    labelVarSumOfFaces.setFont(Font.font("Regular", FontWeight.BOLD, 13));
-    labelVarSumOfFaces.setStyle("-fx-text-fill: red;");
-    Label labelVarCardsOfHearts = new Label("-");
-    labelVarCardsOfHearts.setFont(Font.font("Regular", FontWeight.BOLD, 13));
-    labelVarCardsOfHearts.setStyle("-fx-text-fill: red;");
-    Label labelVarFlush = new Label("-");
-    labelVarFlush.setFont(Font.font("Regular", FontWeight.BOLD, 13));
-    labelVarFlush.setStyle("-fx-text-fill: red;");
-    Label labelVarQueenOfSpades = new Label("-");
-    labelVarQueenOfSpades.setFont(Font.font("Regular", FontWeight.BOLD, 13));
-    labelVarQueenOfSpades.setStyle("-fx-text-fill: red;");
+    this.sumLabel = new Label("-");
+    this.sumLabel.setFont(Font.font("Regular", FontWeight.BOLD, 13));
+    this.cardOfHeartsLabel = new Label("-");
+    this.cardOfHeartsLabel.setFont(Font.font("Regular", FontWeight.BOLD, 13));
+    this.flushLabel = new Label("-");
+    this.flushLabel.setFont(Font.font("Regular", FontWeight.BOLD, 13));
+    this.queenOfSpadesLabel = new Label("-");
+    this.queenOfSpadesLabel.setFont(Font.font("Regular", FontWeight.BOLD, 13));
 
     GridPane bottomGrid = new GridPane();
     HBox bottomTLHBox = new HBox();
@@ -94,16 +86,16 @@ public class CardGameGui extends Application {
     HBox bottomBLHBox = new HBox();
     HBox bottomBRHBox = new HBox();
 
-    bottomTLHBox.getChildren().addAll(labelSumOfFaces, labelVarSumOfFaces);
+    bottomTLHBox.getChildren().addAll(labelSumOfFaces, this.sumLabel);
     bottomTLHBox.setSpacing(5);
 
-    bottomTRHBox.getChildren().addAll(labelCardsOfHearts, labelVarCardsOfHearts);
+    bottomTRHBox.getChildren().addAll(labelCardsOfHearts, this.cardOfHeartsLabel);
     bottomTRHBox.setSpacing(5);
 
-    bottomBLHBox.getChildren().addAll(labelFlush, labelVarFlush);
+    bottomBLHBox.getChildren().addAll(labelFlush, this.flushLabel);
     bottomBLHBox.setSpacing(5);
 
-    bottomBRHBox.getChildren().addAll(labelQueenOfSpades, labelVarQueenOfSpades);
+    bottomBRHBox.getChildren().addAll(labelQueenOfSpades, this.queenOfSpadesLabel);
     bottomBRHBox.setSpacing(5);
 
     bottomGrid.add(bottomTLHBox, 0, 0);
@@ -117,8 +109,6 @@ public class CardGameGui extends Application {
     rootNode.setBottom(bottomGrid);
 
 
-    // TODO: set flowpane in center. Add flowpane to pane?
-
     // Center pane --------------------
     // Background color
     BackgroundFill backgroundFillGreen = new BackgroundFill(
@@ -128,37 +118,64 @@ public class CardGameGui extends Application {
     FlowPane mainWindow = new FlowPane();
     mainWindow.setBackground(backgroundCenter);
 
-    Image image = new Image("card_pictures/1C.png");
-    ImageView imageView = new ImageView();
-    imageView.setImage(image);
+    this.path1 = "card_pictures/joker.png";
+    this.path2 = "card_pictures/joker.png";
+    this.path3 = "card_pictures/joker.png";
+    this.path4 = "card_pictures/joker.png";
+    this.path5 = "card_pictures/joker.png";
+
+    this.cardImageView1 = new ImageView(new Image(path1));
+    this.cardImageView1.setFitHeight(200);
+    this.cardImageView1.setFitWidth(138);
+
+    this.cardImageView2 = new ImageView(new Image(path2));
+    this.cardImageView2.setFitHeight(200);
+    this.cardImageView2.setFitWidth(138);
+
+    this.cardImageView3 = new ImageView(new Image(path3));
+    this.cardImageView3.setFitHeight(200);
+    this.cardImageView3.setFitWidth(138);
+
+    this.cardImageView4 = new ImageView(new Image(path4));
+    this.cardImageView4.setFitHeight(200);
+    this.cardImageView4.setFitWidth(138);
+
+    this.cardImageView5 = new ImageView(new Image(path5));
+    this.cardImageView5.setFitHeight(200);
+    this.cardImageView5.setFitWidth(138);
+
+    Image cardImage1 = new Image(path1);
+    ImageView imageView = new ImageView(cardImage1);
+    //imageView.setImage(cardImage1);
     imageView.setFitHeight(200);
     imageView.setFitWidth(138);
 
-    Image image1 = new Image("card_pictures/1D.png");
+    Image cardImage2 = new Image(path2);
     ImageView imageView1 = new ImageView();
-    imageView1.setImage(image1);
+    imageView1.setImage(cardImage2);
     imageView1.setFitHeight(200);
     imageView1.setFitWidth(138);
 
-    Image image2 = new Image("card_pictures/1H.png");
+    Image cardImage3 = new Image(path3);
     ImageView imageView2 = new ImageView();
-    imageView2.setImage(image2);
+    imageView2.setImage(cardImage3);
     imageView2.setFitHeight(200);
     imageView2.setFitWidth(138);
 
-    Image image3 = new Image("card_pictures/1S.png");
+    Image cardImage4 = new Image(path4);
     ImageView imageView3 = new ImageView();
-    imageView3.setImage(image3);
+    imageView3.setImage(cardImage4);
     imageView3.setFitHeight(200);
     imageView3.setFitWidth(138);
 
-    Image image4 = new Image("card_pictures/13H.png");
+    Image cardImage5 = new Image(path5);
     ImageView imageView4 = new ImageView();
-    imageView4.setImage(image4);
+    imageView4.setImage(cardImage5);
     imageView4.setFitHeight(200);
     imageView4.setFitWidth(138);
 
-    mainWindow.getChildren().addAll(imageView, imageView1, imageView2, imageView3, imageView4);
+    mainWindow.getChildren().addAll(
+        cardImageView1, cardImageView2, cardImageView3, cardImageView4, cardImageView5);
 
     mainWindow.setVgap(5);
     mainWindow.setHgap(5);
@@ -175,8 +192,33 @@ public class CardGameGui extends Application {
     stage.show();
   }
 
-  private void printHearts() {
-    // String heartAsString = getAsString(hand.getHearts);
+  public void setSumLabel(int sum) {
+    this.sumLabel.setText(String.valueOf(sum));
+  }
+
+  public void setCardsOfHeartsLabel(String hearts) {
+    this.cardOfHeartsLabel.setText(hearts);
+  }
+
+  public void setFlushLabel(String flush){
+    this.flushLabel.setText(flush);
+  }
+
+  public void setQueenOfSpadesLabel(String queenOfSpades) {
+    this.queenOfSpadesLabel.setText(queenOfSpades);
+  }
+
+  public void setImagePath(String card1, String card2, String card3, String card4, String card5) {
+    this.path1 = "card_pictures/" + card1 + ".png";
+    this.cardImageView1.setImage(new Image(path1));
+    this.path2 = "card_pictures/" + card2 + ".png";
+    this.cardImageView2.setImage(new Image(path2));
+    this.path3 = "card_pictures/" + card3 + ".png";
+    this.cardImageView3.setImage(new Image(path3));
+    this.path4 = "card_pictures/" + card4 + ".png";
+    this.cardImageView4.setImage(new Image(path4));
+    this.path5 = "card_pictures/" + card5 + ".png";
+    this.cardImageView5.setImage(new Image(path5));
   }
 
   // TODO: Create launcher.

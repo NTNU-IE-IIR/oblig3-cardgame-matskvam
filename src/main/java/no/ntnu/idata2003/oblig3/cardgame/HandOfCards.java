@@ -19,7 +19,7 @@ public class HandOfCards {
    * @param numberOfCards number of cards in the hand between 1 and 52.
    */
   public HandOfCards(int numberOfCards) {
-    // TODO: Catch
+    // This exception is not caught due to the limited functionality of the game.
     if (numberOfCards < 1 || numberOfCards > 52) {
       throw new IllegalArgumentException("Number of cards must be between 1 and 52.");
     }
@@ -53,15 +53,35 @@ public class HandOfCards {
   //  "No Hearts", for eksempel.)
 
   /**
-   * Returns all the cards that is of the suit hearts from the hand.
+   * Returns all the cards with the suit hearts from the hand.
    *
-   * @return all the cards that is of the suit hearts from the hand.
+   * @return all the cards with the suit hearts from the hand.
    */
   public List<PlayingCard> getHearts() {
     // This method was made with help from MS Copilot.
     return this.handOfCards.stream()
         .filter(card -> card.getSuit() == 'H')
         .collect(Collectors.toList());
+  }
+
+  /**
+   * Returns a single string with all the cards with the suit hearts from the hand.
+   *
+   * @return a single string with all the cards with the suit hearts from the hand.
+   */
+  public String getHeartsAsString() {
+    String hearts = "";
+
+    if (getHearts().isEmpty()) {
+      hearts = "No hearts";
+    } else {
+      // Made with the help of GitHub Copilot.
+      hearts = this.getHearts().stream()
+          .map(PlayingCard::getAsString)
+          .collect(Collectors.joining(" "));
+
+    }
+    return hearts;
   }
 
   // TODO: checkQueenOfSpades (Sjekk om kortet "Spar dame" finnes blant kortene på hånden.)
@@ -77,6 +97,17 @@ public class HandOfCards {
     // This method was made with help from MS Copilot.
     return this.handOfCards.stream()
         .anyMatch(card -> (card.getSuit() == 'S') && (card.getFace() == 12));
+  }
+
+  public String getQueenOfSpadesAsString() {
+    String queen = "";
+
+    if (this.checkQueenOfSpades()) {
+      queen = "Yes";
+    } else {
+      queen = "No";
+    }
+    return queen;
   }
 
   // TODO: checkFlush (Sjekk om kortene på hånd utgjør en "5-flush". D.v.s. 5 kort av samme farge
@@ -95,5 +126,15 @@ public class HandOfCards {
         .values()
         .stream()
         .anyMatch(count -> count >= 5);
+  }
+
+  public String getFlushAsString() {
+    String flush = "";
+    if (this.checkFlush()) {
+      flush = "Yes";
+    } else {
+      flush = "No";
+    }
+    return flush;
   }
 }

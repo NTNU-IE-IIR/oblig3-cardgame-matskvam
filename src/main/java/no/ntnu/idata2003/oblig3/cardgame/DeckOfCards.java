@@ -60,8 +60,6 @@ public class DeckOfCards {
     return hand;
   }
 
-  // TODO: Should there be a reset/shuffle deck method?
-
   // Used for testing. Remove or move later.
   public static void main(String[] args) {
     DeckOfCards deck = new DeckOfCards();
@@ -110,6 +108,8 @@ public class DeckOfCards {
         .collect(Collectors.joining(" "));
 
     System.out.println(heartAsString);
+
+    System.out.println(hand.getHeartsAsString());
 
 //    int count = 0;
 //    while (!hand.checkFlush()) {
