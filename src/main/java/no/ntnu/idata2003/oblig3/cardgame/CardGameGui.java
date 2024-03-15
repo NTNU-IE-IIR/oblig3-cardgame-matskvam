@@ -221,5 +221,7 @@ public class CardGameGui extends Application {
     this.cardImageView5.setImage(new Image(path5));
   }
 
-  // TODO: Create launcher.
+  public static void appMain(String[] args) {
+    launch();
+  }
 }

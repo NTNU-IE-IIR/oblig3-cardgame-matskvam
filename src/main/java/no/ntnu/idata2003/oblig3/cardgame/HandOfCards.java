@@ -110,9 +110,6 @@ public class HandOfCards {
     return queen;
   }
 
-  // TODO: checkFlush (Sjekk om kortene på hånd utgjør en "5-flush". D.v.s. 5 kort av samme farge
-  //  (5 hjerter eller 5 ruter eller 5 kløver eller 5 spar).)
-
   /**
    * Returns {@code true} if the hand of cards contains a flush, and {@code false} otherwise.
    *
