@@ -1,7 +1,9 @@
 package no.ntnu.idata2003.oblig3.cardgame;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * Represents a deck of 52 cards.
@@ -73,12 +75,15 @@ public class DeckOfCards {
 //    }
 
     HandOfCards hand = new HandOfCards(5);
+    // Prints the cards in the hand.
     for (PlayingCard card : hand.getHandOfCards()) {
       System.out.println(card.getAsString());
     }
 
+    // Prints the sum of the cards in the hand.
     System.out.println("The sum of the cards is: " + hand.checkSum());
 
+    // Prints the cards of hearts in the hand.
     for (PlayingCard card : hand.getHearts()) {
       System.out.println(card.getAsString());
     }
@@ -86,18 +91,34 @@ public class DeckOfCards {
       System.out.println("No Hearts");
     }
 
+    // Prints if the hand is a flush or not.
     if (hand.checkFlush()) {
       System.out.println("Flush");
     } else {
       System.out.println("No Flush");
     }
 
-    int count = 0;
-
-    while (!hand.checkFlush()) {
-        hand = new HandOfCards(5);
-        count++;
+    if (hand.checkQueenOfSpades()) {
+        System.out.println("Queen of Spades\n");
+    } else {
+        System.out.println("No Queen of Spades\n");
     }
-    System.out.println("Number of hands dealt before flush: " + count);
+
+    // Made with the help of GitHub Copilot.
+    String heartAsString = hand.getHearts().stream()
+        .map(PlayingCard::getAsString)
+        .collect(Collectors.joining(" "));
+
+    System.out.println(heartAsString);
+
+//    int count = 0;
+//    while (!hand.checkFlush()) {
+//        hand = new HandOfCards(5);
+//        count++;
+//    }
+//    System.out.println("Number of hands dealt before flush: " + count);
+//    for (PlayingCard card : hand.getHandOfCards()) {
+//      System.out.println(card.getAsString());
+//    }
   }
 }
