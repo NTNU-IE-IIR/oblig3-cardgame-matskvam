@@ -1,9 +1,7 @@
 package no.ntnu.idata2003.oblig3.cardgame;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 /**
  * Represents a deck of 52 cards.

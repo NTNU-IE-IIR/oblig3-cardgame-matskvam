@@ -26,7 +26,7 @@ import javafx.stage.Stage;
  */
 public class CardGameGui extends Application {
   private CardGameController controller;
-  private Label sumLabel,cardOfHeartsLabel ,flushLabel ,queenOfSpadesLabel;
+  private Label sumLabel, cardOfHeartsLabel, flushLabel, queenOfSpadesLabel;
   private String path1, path2, path3, path4, path5;
   private ImageView cardImageView1, cardImageView2, cardImageView3, cardImageView4, cardImageView5;
 
@@ -192,22 +192,51 @@ public class CardGameGui extends Application {
     stage.show();
   }
 
+  /**
+   * Updates the label that shows the sum of the faces.
+   *
+   * @param sum the new value to be shown in the label
+   */
   public void setSumLabel(int sum) {
     this.sumLabel.setText(String.valueOf(sum));
   }
 
+  /**
+   * Updates the label that shows the cards of hearts.
+   *
+   * @param hearts the new value to be shown in the label
+   */
   public void setCardsOfHeartsLabel(String hearts) {
     this.cardOfHeartsLabel.setText(hearts);
   }
 
-  public void setFlushLabel(String flush){
+  /**
+   * Updates the label that shows if the hand is a flush.
+   *
+   * @param flush the new value to be shown in the label
+   */
+  public void setFlushLabel(String flush) {
     this.flushLabel.setText(flush);
   }
 
+  /**
+   * Updates the label that shows if the hand contains the queen of spades.
+   *
+   * @param queenOfSpades the new value to be shown in the label
+   */
   public void setQueenOfSpadesLabel(String queenOfSpades) {
     this.queenOfSpadesLabel.setText(queenOfSpades);
   }
 
+  /**
+   * Updates the image and the path of the image of each card in the hand.
+   *
+   * @param card1 the path of the image of the first card
+   * @param card2 the path of the image of the second card
+   * @param card3 the path of the image of the third card
+   * @param card4 the path of the image of the fourth card
+   * @param card5 the path of the image of the fifth card
+   */
   public void setImagePath(String card1, String card2, String card3, String card4, String card5) {
     this.path1 = "card_pictures/" + card1 + ".png";
     this.cardImageView1.setImage(new Image(path1));
@@ -221,6 +250,11 @@ public class CardGameGui extends Application {
     this.cardImageView5.setImage(new Image(path5));
   }
 
+  /**
+   * The main method of the application.
+   *
+   * @param args the command line arguments
+   */
   public static void appMain(String[] args) {
     launch();
   }

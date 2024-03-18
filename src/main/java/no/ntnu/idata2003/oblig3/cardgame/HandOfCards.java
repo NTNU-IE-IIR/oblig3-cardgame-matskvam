@@ -48,10 +48,6 @@ public class HandOfCards {
         .sum();
   }
 
-  // TODO: showHearts (Hent ut bare kort som er av fargen "Hjerter", og vis i et tekstfelt på
-  //  formen "H12 H9 H1". Dersom det ikke er noen Hjerter på hånd, kan tekstfeltet inneholde teksten
-  //  "No Hearts", for eksempel.)
-
   /**
    * Returns all the cards with the suit hearts from the hand.
    *
@@ -84,8 +80,6 @@ public class HandOfCards {
     return hearts;
   }
 
-  // TODO: checkQueenOfSpades (Sjekk om kortet "Spar dame" finnes blant kortene på hånden.)
-
   /**
    * Returns {@code true} if the hand of cards contains queen of spades, and {@code false}
    * otherwise.
@@ -99,6 +93,11 @@ public class HandOfCards {
         .anyMatch(card -> (card.getSuit() == 'S') && (card.getFace() == 12));
   }
 
+  /**
+   * Returns a string with "Yes" if the hand of cards contains queen of spades, and "No" otherwise.
+   *
+   * @return a string with "Yes" if the hand of cards contains queen of spades, and "No" otherwise.
+   */
   public String getQueenOfSpadesAsString() {
     String queen = "";
 
@@ -125,6 +124,11 @@ public class HandOfCards {
         .anyMatch(count -> count >= 5);
   }
 
+  /**
+   * Returns a string with "Yes" if the hand of cards contains a flush, and "No" otherwise.
+   *
+   * @return a string with "Yes" if the hand of cards contains a flush, and "No" otherwise.
+   */
   public String getFlushAsString() {
     String flush = "";
     if (this.checkFlush()) {

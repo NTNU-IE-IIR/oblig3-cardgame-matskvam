@@ -7,16 +7,27 @@ public class CardGameController {
   private HandOfCards hand;
   private CardGameGui cardGame;
 
+  /**
+   * Creates a new instance of a controller for the card game.
+   *
+   * @param theCardGame the card game to control.
+   */
   public CardGameController(CardGameGui theCardGame) {
     this.hand = new HandOfCards(5);
     this.hand.getHandOfCards().clear();
     this.cardGame = theCardGame;
   }
 
+  /**
+   * Handles the "deal hand" action.
+   */
   public void doDealHand() {
     this.hand = new HandOfCards(5);
   }
 
+  /**
+   * Gets the values to show the hand of cards.
+   */
   public void showHand() {
     char suit1 = this.hand.getHandOfCards().get(0).getSuit();
     int face1 = this.hand.getHandOfCards().get(0).getFace();
@@ -42,6 +53,9 @@ public class CardGameController {
     this.cardGame.setImagePath(card1, card2, card3, card4, card5);
   }
 
+  /**
+   * Handles the "check hand" action.
+   */
   public void doCheckHand() {
     this.cardGame.setSumLabel(this.hand.checkSum());
     this.cardGame.setCardsOfHeartsLabel(this.hand.getHeartsAsString());
